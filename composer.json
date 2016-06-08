@@ -1,0 +1,11 @@
+{
+  "name": "benjaminmedia/headway-slideshow-block",
+  "type": "wordpress-plugin",
+  "homepage": "https://github.com/BenjaminMedia/headway-slideshow-block",
+  "license": "GPLv3",
+  "description": "This block lets you easily slideshow block with headway",
+  "keywords": ["plugin"],
+  "require": {
+    "composer/installers": "~1.0.6"
+  }
+}
