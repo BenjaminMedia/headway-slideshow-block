@@ -6,7 +6,7 @@ class HeadwaySlideshowBlock extends HeadwayBlockAPI {
     public $options_class = 'HeadwaySlideshowBlockOptions';
 
     public static function enqueue_action($block_id, $block) {
-        add_action('headway_body_open', array(__CLASS__, 'add_slideshow_js'));
+        add_action('headway_body_close', array(__CLASS__, 'add_slideshow_js'));
         return;
     }
 
