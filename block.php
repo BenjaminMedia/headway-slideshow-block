@@ -60,12 +60,20 @@ class HeadwaySlideshowBlock extends HeadwayBlockAPI {
                         foreach ($slides as $post_id) {
                             $post = get_post($post_id);
                             $post_id = $post->ID;
-                            $categories = wp_get_post_categories($post_id);
-                            $thumb_id = get_post_thumbnail_id($post_id);
-                            $thumb_url = wp_get_attachment_image_src($thumb_id, 'large');
+                            
+                            if ($post->post_type == 'attachment') {
+                                // image
+                                $thumb_url = wp_get_attachment_image_src($post_id, 'large');
+                            } else {
+                                // post page
+                                $categories = wp_get_post_categories($post_id);
+                                $thumb_id = get_post_thumbnail_id($post_id);
+                                $thumb_url = wp_get_attachment_image_src($thumb_id, 'large');
+                            }
                             ?>
                             <div class="slider-content">
                                 <div class="sldr-img" style="background-image: url(<?php echo $thumb_url[0]; ?>);"></div>
+                                <?php if ($post->post_type != 'attachment') { ?>
                                 <div class="sldr-post-cntnt-algnr">
                                     <div class="sldr-post-cntnt">
                                         <div class="sldr-post-cntnt-brdr">
@@ -90,6 +98,7 @@ class HeadwaySlideshowBlock extends HeadwayBlockAPI {
                                         </div>
                                     </div>
                                 </div>
+                                <?php } ?>
                             </div><!-- .slider-content -->
                         <?php } ?>
                     </div><!-- .owl-carousel -->
