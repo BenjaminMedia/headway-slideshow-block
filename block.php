@@ -63,12 +63,12 @@ class HeadwaySlideshowBlock extends HeadwayBlockAPI {
                             
                             if ($post->post_type == 'attachment') {
                                 // image
-                                $thumb_url = wp_get_attachment_image_src($post_id, 'large');
+                                $thumb_url = wp_get_attachment_image_src($post_id, 'full');
                             } else {
                                 // post page
                                 $categories = wp_get_post_categories($post_id);
                                 $thumb_id = get_post_thumbnail_id($post_id);
-                                $thumb_url = wp_get_attachment_image_src($thumb_id, 'large');
+                                $thumb_url = wp_get_attachment_image_src($thumb_id, 'full');
                             }
                             ?>
                             <div class="slider-content">
