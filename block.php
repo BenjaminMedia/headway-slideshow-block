@@ -10,6 +10,14 @@ class HeadwaySlideshowBlock extends HeadwayBlockAPI {
         return;
     }
 
+    public function __construct(){
+        add_action('wp_enqueue_scripts', array(__CLASS__,'add_styling'));
+    }
+
+    public function add_styling(){
+        wp_enqueue_style('headway-carousel-style',plugins_url('headway-slideshow-block/assets/owl.carousel.css'));
+    }
+
     public static function add_slideshow_js() {
         /* Check to make sure it hasn't been loaded before */
         global $headway_slideshow_block_enqueued;
@@ -19,7 +27,6 @@ class HeadwaySlideshowBlock extends HeadwayBlockAPI {
 
         /* Hasn't been loaded, go ahead and load js now */
         ?>
-        <link rel="stylesheet" href="<?php echo plugins_url('headway-slideshow-block/assets/owl.carousel.css'); ?>">
         <link rel="stylesheet" href="<?php echo plugins_url('headway-slideshow-block/assets/style.css'); ?>">
         <script type="text/javascript" src="<?php echo plugins_url('headway-slideshow-block/assets/owl.carousel.js'); ?>"></script>
         <script type="text/javascript">
