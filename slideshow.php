@@ -3,7 +3,7 @@
 Plugin Name: Headway Block: Slideshow
 Plugin URI: http://niteco.se
 Description: This block lets you easily create a slideshow block with headway.
-Version: 0.3b
+Version: 0.4
 Author: Niteco
 Author URI: http://niteco.se
 License: GNU GPL v2
