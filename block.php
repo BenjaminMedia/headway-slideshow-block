@@ -6,7 +6,9 @@ class HeadwaySlideshowBlock extends HeadwayBlockAPI {
     public $options_class = 'HeadwaySlideshowBlockOptions';
 
     public static function enqueue_action($block_id, $block) {
-        add_action('headway_body_close', array(__CLASS__, 'add_slideshow_js'));
+        add_action('headway_body_close', function() use($block) {
+            return self::add_slideshow_js($block);
+        });
         return;
     }
 
@@ -18,13 +20,14 @@ class HeadwaySlideshowBlock extends HeadwayBlockAPI {
         wp_enqueue_style('headway-carousel-style',plugins_url('headway-slideshow-block/assets/owl.carousel.css'));
     }
 
-    public static function add_slideshow_js() {
+    public static function add_slideshow_js($block) {
         /* Check to make sure it hasn't been loaded before */
         global $headway_slideshow_block_enqueued;
         if ( isset( $headway_slideshow_block_enqueued ) && $headway_slideshow_block_enqueued ) {
             return false;
         }
-
+        $timeout = parent::get_setting($block, 'timeout', '3000');
+        $speed = parent::get_setting($block, 'speed', '1000');
         /* Hasn't been loaded, go ahead and load js now */
         ?>
         <link rel="stylesheet" href="<?php echo plugins_url('headway-slideshow-block/assets/style.css'); ?>">
@@ -44,10 +47,9 @@ class HeadwaySlideshowBlock extends HeadwayBlockAPI {
                     center: true,
                     autoHeight: true,
                     autoplay: true,
-                    autoplayTimeout: 3000,
+                    autoplayTimeout: <?php echo $timeout; ?>,
                     autoplayHoverPause: true,
-                    autoplaySpeed: 1000,
-
+                    autoplaySpeed: <?php echo $speed; ?>
                 });
             });
         </script>
